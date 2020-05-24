@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Dom{
+            async *getDomName(prepose,No){
+                try{
+                    while (true){
+                        let arg=yield prepose +(--No);
+                        if(No==0) return;
+                    }
+                }
+                catch{
+                    yield prepose+'0';
+                }
+            }
+        }
+        let dom=new Dom();
+        let fn1=async function(){
+            let dom1=dom.getDomName('text','4');
+            console.log(await dom1.next());
+            console.log(await dom1.throw());
+            console.log(await dom1.next());
+            let dom2=dom.getDomName('check','4');
+            let fn=async function(){
+                for await(let i of dom2 )
+                console.log(i);
+            }
+            fn();
+        }
+        fn1();
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let posStr=function(str){
+            let pStr1=new Promise((resolve,reject)=>{
+                if(str.startsWith("p")) reject('字符串不能以p开头')
+                else(resolve('符合第1个要求'));
+            })
+            let pStr2=new Promise((resolve,reject)=>{
+                if(str.endsWith("p")) reject('字符串不能以p结束')
+                else(resolve('符合第2个要求'));
+            })
+            return Promise.all([pStr2,pStr1]);
+        }
+        let arr=['python','jsp','java'];
+        for(let p of arr){
+            posStr(p)
+            .then(v=>console.log(p,v))
+            .catch(r=>console.log(p,r))
+        }
+    </script>
+</body>
+</html>

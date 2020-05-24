@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let grade=function(score){
+            return new Promise((resolve,reject)=>{
+                if(score>=60)
+                   resolve(score-60);
+                else
+                    reject('不及格没有绩点');
+            })
+        }
+        let gradePoint=function (grade){
+            return new Promise((resolve,reject)=>{
+                let gp=1+grade*0.1;
+                if(gp>5) reject('非法成绩没有绩点');
+                else(resolve(gp));
+            })
+        }
+        async function fn(sc){
+            try{
+                let gd=grade(sc);
+                let gp=gradePoint(gd);
+                console.log(`${sc}分,绩点${gp}`);
+            }
+            catch(e){
+                console.log(`${sc}分,${e}`);
+            }
+        }
+        async function call(){
+            await fn(61);await fn(50);await fn(102);
+        }
+        call();
+    </script>
+</body>
+</html>
